@@ -24,7 +24,7 @@ RUN \
   php7.0-apcu php7.0-bcmath php7.0-cli php7.0-curl php7.0-gd php7.0-geoip php7.0-gettext php7.0-imagick php7.0-intl php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql php7.0-sqlite3 php7.0-xdebug php7.0-xml php7.0-xmlrpc php7.0-zip php7.0-memcached \
   nodejs yarn &&\
  apt-get autoclean && apt-get clean && apt-get autoremove &&\
- update-alternatives --set php /usr/bin/php7.0
+ update-alternatives --set php /usr/bin/php7.1
 
 RUN \
  sed -ri -e "s/^variables_order.*/variables_order=\"EGPCS\"/g" /etc/php/7.0/cli/php.ini &&\
@@ -34,7 +34,7 @@ RUN \
 
 RUN \
  curl -sSL https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/bin &&\
- curl -sSL https://phar.phpunit.de/phpunit.phar -o /usr/bin/phpunit  && chmod +x /usr/bin/phpunit  &&\
+ curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o /usr/bin/phpunit  && chmod +x /usr/bin/phpunit  &&\
  curl -sSL http://codeception.com/codecept.phar -o /usr/bin/codecept && chmod +x /usr/bin/codecept &&\
  npm install --no-color --production --global gulp-cli webpack mocha grunt n &&\
  rm -rf /root/.npm /root/.composer /tmp/* /var/lib/apt/lists/*
