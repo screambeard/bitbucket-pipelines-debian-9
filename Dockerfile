@@ -23,11 +23,17 @@ RUN \
  python get-pip.py &&\
  pip install awsebcli --upgrade &&\
  apt-get -y --no-install-recommends install \
-  php7.1-apcu php7.1-bcmath php7.1-cli php7.1-curl php7.1-gd php7.1-geoip php7.1-gettext php7.1-imagick php7.1-intl php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-sqlite3 php7.1-xdebug php7.1-xml php7.1-xmlrpc php7.1-zip php7.1-memcached \
-  php7.0-apcu php7.0-bcmath php7.0-cli php7.0-curl php7.0-gd php7.0-geoip php7.0-gettext php7.0-imagick php7.0-intl php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql php7.0-sqlite3 php7.0-xdebug php7.0-xml php7.0-xmlrpc php7.0-zip php7.0-memcached \
+  php7.1-apcu php7.1-bcmath php7.1-cli php7.1-curl php7.1-gd php7.1-geoip php7.1-gettext php7.1-imagick php7.1-intl php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-sqlite3 php7.1-xdebug php7.1-xml php7.1-xmlrpc php7.1-zip php7.1-memcached php-pear php7.1-dev \
+  php7.0-apcu php7.0-bcmath php7.0-cli php7.0-curl php7.0-gd php7.0-geoip php7.0-gettext php7.0-imagick php7.0-intl php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql php7.0-sqlite3 php7.0-xdebug php7.0-xml php7.0-xmlrpc php7.0-zip php7.0-memcached php-pear php7.0-dev \
   nodejs yarn &&\
  apt-get autoclean && apt-get clean && apt-get autoremove &&\
  update-alternatives --set php /usr/bin/php7.1
+
+RUN \
+ pecl install mongodb &&\
+ php --ini &&\
+ echo "extension=mongodb.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` &&\
+ cat /etc/php/7.1/cli/php.ini
 
 RUN \
  sed -ri -e "s/^variables_order.*/variables_order=\"EGPCS\"/g" /etc/php/7.0/cli/php.ini &&\

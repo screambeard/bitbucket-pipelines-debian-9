@@ -34,3 +34,7 @@ pipelines:
           - npm install --no-spin
           - gulp
 ```
+
+# Update image
+- docker image build .
+- docker push 
